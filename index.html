@@ -87,7 +87,7 @@ stream.onValue(function(v){
   $("#gw").click(function(e){
     e.preventDefault();
     if (b){
-
+      $("#gw").html('close');
       c=$("section").html();
       $.get( "graduationw.html", function( data ) {
   $( "section" ).html( data );
@@ -95,6 +95,8 @@ stream.onValue(function(v){
       b=false
     }else{
     $('section').html(c);
+
+      $("#gw").html('graduation work');
     b=true;
     }
 
