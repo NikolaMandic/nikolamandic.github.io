@@ -27,22 +27,47 @@
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
       </header>
       <section>
+
         <h3>
-<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>Welcome to GitHub Pages.</h3>
+<a name="welcome-to-github-pages" class="anchor" href="#welcome-to-github-pages"><span class="octicon octicon-link"></span></a>CoffeeWatch flickering
 
-<p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+</h3>
 
-<pre><code>$ cd your_repo_root/repo_name
-$ git fetch origin
-$ git checkout gh-pages
-</code></pre>
+<p>
 
-<p>If you're using the GitHub for Mac, simply sync your repository and you'll see the new branch.</p>
+if you use https://github.com/kchmck/vim-coffee-script and CoffeeWatch feature causes screen to flicker
+here is the alternative<br/>
+<br/>
+add this to vimrc<br/>
+“make coffeescripts auto compile on save<br/>
+autocmd BufWritePost *.coffee silent make!<br/>
+“make buffer autorelaod on disk change<br/>
+:set autoread<br/>
+<br/>
+1. compile a coffeescript script<br/>
+2. open the compiled script in for example vertical window<br/>
+<br/>
+now on save the compiled script will be autoreloaded in vertical window<br/>
+</p>
+
+
 
 <h3>
-<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>Designer Templates</h3>
+<a name="designer-templates" class="anchor" href="#designer-templates"><span class="octicon octicon-link"></span></a>
+backonjs socketio plugin
+</h3>
+<p>
+Here is the plugin for baconjs to support socket.io <a href="https://github.com/NikolaMandic/baconjs-socketio-plugin">https://github.com/NikolaMandic/baconjs-socketio-plugin</a> use it like this
+<pre><code>
+var socket = io.connect(address);
+var stream = socket.asEventStream(“news”);
 
-<p>We've crafted some handsome templates for you to use. Go ahead and continue to layouts to browse through them. You can easily go back to edit your page before publishing. After publishing your page, you can revisit the page generator and switch to another theme. Your Page content will be preserved if it remained markdown format.</p>
+stream.onValue(function(v){
+  console.log(v);
+});
+</code></pre>
+
+</p>
 
 <h3>
 <a name="rather-drive-stick" class="anchor" href="#rather-drive-stick"><span class="octicon octicon-link"></span></a>Rather Drive Stick?</h3>
