@@ -160,11 +160,20 @@ header ul a strong {
 }
 
 section {
+  padding:30px;
+  background: rgba(255,255,255,0.87);
   width:500px;
   float:right;
   padding-bottom:50px;
 }
+section h3{
+  font-weight:600;
+}
+section p{
 
+  background: rgba(255,255,255,0.87);
+  color:rgb(0,30,0);
+}
 small {
   font-size:11px;
 }
@@ -217,7 +226,11 @@ footer {
     top:52px;
   }
 }
-
+h1{
+  font-size:26px;
+  color:rgba(0,200,0,0.99);
+  background:rgba(255,255,255,0.99);
+}
 @media print, screen and (max-width: 720px) {
   body {
     word-wrap:break-word;
@@ -235,7 +248,11 @@ footer {
     word-wrap:normal;
   }
 }
-
+.view{
+  background:rgba(255,255,255,0.9);
+  font-weight:bold;
+  font-size:24px;
+}
 @media print, screen and (max-width: 480px) {
   body {
     padding:15px;
