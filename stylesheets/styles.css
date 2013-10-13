@@ -252,8 +252,8 @@ h1{
     word-wrap:normal;
   }
 }
+
 .view{
-  background:rgb(230,200,0);
   font-weight:bold;
   font-size:27px;
   font-color:rgb(0,0,255);
