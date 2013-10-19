@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-10-19T18:51:10+01:00</updated>
+  <updated>2013-10-19T19:18:19+01:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -12,5 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[diskotek: second iteration]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/"/>
+    <updated>2013-10-19T18:52:00+01:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration</id>
+    <content type="html"><![CDATA[<p>second iteration of diskotek development will be bigger than the first.<br/>
+I am currently working on a scripting language called beeScript.
+Thought behind beeScript is to have an automation language for the debugger like some modern debuggers have.</p>
+
+<p>Currently it looks something like this(as development goes on it may change):</p>
+
+<pre><code>def doThat()
+  variable=5
+
+def doThis()
+  variable=3
+
+place = 0x80000000
+memory.place = 'nop'
+variable = memory.place
+if variable == 3
+  doThat()
+else
+  doThis()
+
+while variable
+  variable=variable-1
+</code></pre>
+
+<p>I plan to add something like this:</p>
+
+<pre><code>memory.headers.elfHeader
+fImage.headers.elfHeader
+fImage.headers.relocations
+</code></pre>
+
+<p>Also plan to integrate Ace editor in main page.<br/>
+BeeScript implementation is in CoffeeScript it has compiler in CoffeeScript that produces something
+that might be called &ldquo;code&rdquo;, it&rsquo;s a stack of functions.
+That generated content is then turned over to simple stack machine runner that runs those functions one by one.</p>
+
+<p>Besides scripting togetherJS is half integrated on page it needs more work.<br/>
+x86 support is added.<br/>
+it has support for editing of raw bytes where user selects rows and click enter.
+It opens up editbox where one can enter new bytes. If they do not fit it is error.<br/>
+That is all located in development branch.</p>
+]]></content>
+  </entry>
   
 </feed>

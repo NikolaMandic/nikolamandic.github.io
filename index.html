@@ -9,7 +9,9 @@
   <meta name="author" content="Nikola Mandic">
 
   
-  <meta name="description" content="Blog Archives Recent Posts GitHub Repos Status updating&#8230; @NikolaMandic on GitHub $(document).ready(function(){ if (!window.jXHR){ var jxhr = &hellip;">
+  <meta name="description" content="second iteration of diskotek development will be bigger than the first.
+I am currently working on a scripting language called beeScript.
+Thought &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +80,82 @@
       <div class="blog-index">
   
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/19/diskotek-second-iteration/">Diskotek: Second Iteration</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-19T18:52:00+01:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>second iteration of diskotek development will be bigger than the first.<br/>
+I am currently working on a scripting language called beeScript.
+Thought behind beeScript is to have an automation language for the debugger like some modern debuggers have.</p>
+
+<p>Currently it looks something like this(as development goes on it may change):</p>
+
+<pre><code>def doThat()
+  variable=5
+
+def doThis()
+  variable=3
+
+place = 0x80000000
+memory.place = 'nop'
+variable = memory.place
+if variable == 3
+  doThat()
+else
+  doThis()
+
+while variable
+  variable=variable-1
+</code></pre>
+
+<p>I plan to add something like this:</p>
+
+<pre><code>memory.headers.elfHeader
+fImage.headers.elfHeader
+fImage.headers.relocations
+</code></pre>
+
+<p>Also plan to integrate Ace editor in main page.<br/>
+BeeScript implementation is in CoffeeScript it has compiler in CoffeeScript that produces something
+that might be called &ldquo;code&rdquo;, it&rsquo;s a stack of functions.
+That generated content is then turned over to simple stack machine runner that runs those functions one by one.</p>
+
+<p>Besides scripting togetherJS is half integrated on page it needs more work.<br/>
+x86 support is added.<br/>
+it has support for editing of raw bytes where user selects rows and click enter.
+It opens up editbox where one can enter new bytes. If they do not fit it is error.<br/>
+That is all located in development branch.</p>
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
     <a href="/blog/archives">Blog Archives</a>
@@ -89,6 +167,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/19/diskotek-second-iteration/">Diskotek: Second Iteration</a>
+      </li>
     
   </ul>
 </section>
