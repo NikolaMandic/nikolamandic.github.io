@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-10-22T23:37:33+02:00</updated>
+  <updated>2013-10-22T23:38:23+02:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -18,8 +18,7 @@
     <link href="http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/"/>
     <updated>2013-10-22T23:33:00+02:00</updated>
     <id>http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs</id>
-    <content type="html"><![CDATA[<p>here is a way of including requirejs package to be used as angular dependency.<br/>
-It has to be triggered after it is loaded</p>
+    <content type="html"><![CDATA[<p>here is a way of including requirejs package to be used as angular dependency.</p>
 
 <div><script src='https://gist.github.com/7108545.js'></script>
 <noscript><pre><code>'use strict';
