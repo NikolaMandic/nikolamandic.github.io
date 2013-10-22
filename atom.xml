@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-10-20T14:51:55+01:00</updated>
+  <updated>2013-10-22T23:36:15+02:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -14,9 +14,55 @@
 
   
   <entry>
+    <title type="html"><![CDATA[requirejs module and angularjs]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/"/>
+    <updated>2013-10-22T23:33:00+02:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs</id>
+    <content type="html"><![CDATA[<p>here is a way of including requirejs package to be used as angular dependency
+it has to be triggered after it is loaded</p>
+
+<div><script src='https://gist.github.com/7108545.js'></script>
+<noscript><pre><code>'use strict';
+
+//setup module loading
+require.config({
+    packages:[{
+      name:'ace',
+      location:'../bower_components/ace/lib/ace',
+      main:'ace'
+    }]
+});
+//create wraper service
+angular.module('myShinyNewApp').factory('ace', function() {
+  var ace={
+    ace:null
+  };
+
+  require(['ace'],function(_ace){
+      ace.ace=_ace;
+  });
+  return ace;
+});
+
+//and now use it for example in a directive
+
+angular.module('ldApp').directive('editor',['ace',function(aceS) {
+  var ace = aceS.ace;
+  //then it can be used like it would normaly
+  var editor = ace.edit(element);
+
+}]);
+</code></pre></noscript></div>
+
+
+
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[diskotek: second iteration]]></title>
     <link href="http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/"/>
-    <updated>2013-10-19T18:52:00+01:00</updated>
+    <updated>2013-10-19T18:52:00+02:00</updated>
     <id>http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration</id>
     <content type="html"><![CDATA[<p>second iteration of diskotek development will be bigger than the first.<br/>
 I am currently working on a scripting language called beeScript.
