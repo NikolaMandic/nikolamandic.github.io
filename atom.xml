@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-10-24T17:00:53+02:00</updated>
+  <updated>2013-10-28T06:02:32+01:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -12,6 +12,119 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[beeScript]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/10/25/beescript/"/>
+    <updated>2013-10-25T15:26:00+02:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/10/25/beescript</id>
+    <content type="html"><![CDATA[<p>In one of my previous posts I wrote about beeScript.
+BeeScript is meant to be an automation language for diskotek.
+This post is a more detailed description.
+Right now it is in early development so this is the description of how it is developed and what state it is in.   <br/>
+This is a list of what is currently implemented regarding the communication with the backend:</p>
+
+<ul>
+<li><p>reading memory  <br/>
+    place=0x80000000  <br/>
+    a = memory.place</p></li>
+<li><p>sending gdb commands  <br/>
+    s ni  <br/>
+    s disas /rm $eip-40, $eip+40</p></li>
+</ul>
+
+
+<p>One can use control flow structures, function definitions, variable definitions, expressions.
+Some might be developed further.</p>
+
+<p>now the look on the internals of how it all works</p>
+
+<ul>
+<li>parser is jison generated and is located in beeScript.jison</li>
+<li>interface for code generator is located in compiler.coffee.
+it contains bunch of functions that are called when parsers productions are reduced. That class is meant to bee extended
+by any code/ast generator.</li>
+</ul>
+
+
+<h3>beeScriptRunner &amp; stack machine vm</h3>
+
+<p>example of one such generator is in beeScriptRunner.coffee. It is a generator for stack machine vm written in coffee script.
+The stack machine vm has two stacks.</p>
+
+<ul>
+<li>expression stack. Used to calculate and assign stuff  <br/>
+    @stack</li>
+<li>call stack. Used for method invocation  <br/>
+    @callStack</li>
+</ul>
+
+
+<p>variables are stored in</p>
+
+<pre><code>@variables    
+</code></pre>
+
+<p>@variables is an object whose properties are variable names</p>
+
+<pre><code>name:{
+  name:
+  value:
+}
+</code></pre>
+
+<p>functions are stored in</p>
+
+<pre><code>@functions    
+</code></pre>
+
+<p>there is also diskotekLib that is an object containing functions that interface with the backend.
+It provides easy extensiblity for the script one can use functions from it by just calling them like functions defined in beeScript.
+There is only one argument passed that is ref to expression stack like so.</p>
+
+<pre><code>f(@stack)    
+</code></pre>
+
+<p>Parameters are on the stack so one just needs to pop them.  <br/>
+Care must be taken to leave the stack in state so that rest of the code works.  <br/>
+One would define a function with python like syntax without the : at the end like so</p>
+
+<pre><code>def func(param1, param2)
+  param1 = param2
+
+f=func()
+</code></pre>
+
+<p>It is important to put that newline at the end of the function. That newline means end of a function. That may be slightly modified.</p>
+
+<p>Arguments are searched first in function block and then global scope. That may change.   <br/>
+There are special variables:</p>
+
+<pre><code>memory
+eax,ecx,edx,ebx...
+</code></pre>
+
+<p>That list may change.   <br/>
+Memory special variable can be used for reading from and writing to memory.   <br/>
+This is an example of reading:</p>
+
+<pre><code>//create a variable that has an address from where to read memory from
+memoryLocation = 0x80000000
+//read from memory
+contentsOfMemLocation = memory.memoryLocation     
+</code></pre>
+
+<p>This is an example of writing:</p>
+
+<pre><code>//create a variable that has an address where we want to write to memory
+memoryLocation = 0x80000000
+//assemble and write to memory
+memory.memoryLocation = 'nop'
+</code></pre>
+
+<p>This post may be updated so that it can be used as a reference for the beeScript in the future.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[requirejs module and angularjs]]></title>

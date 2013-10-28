@@ -5,13 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>diskotek: second iteration - NikolaMandic.github.io</title>
+  <title>beeScript - NikolaMandic.github.io</title>
   <meta name="author" content="Nikola Mandic">
 
   
-  <meta name="description" content="second iteration of diskotek development will be bigger than the first.
-I am currently working on a scripting language called beeScript.
-Thought &hellip;">
+  <meta name="description" content="In one of my previous posts I wrote about beeScript.
+BeeScript is meant to be an automation language for diskotek.
+This post is a more detailed &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +20,7 @@ Thought &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration">
+  <link rel="canonical" href="http://NikolaMandic.github.io/blog/2013/10/25/beescript">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NikolaMandic.github.io" type="application/atom+xml">
@@ -82,7 +82,7 @@ Thought &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Diskotek: Second Iteration</h1>
+      <h1 class="entry-title">beeScript</h1>
     
     
       <p class="meta">
@@ -98,54 +98,118 @@ Thought &hellip;">
   
 
 
-<time datetime="2013-10-19T18:52:00+02:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+<time datetime="2013-10-25T15:26:00+02:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>second iteration of diskotek development will be bigger than the first.<br/>
-I am currently working on a scripting language called beeScript.
-Thought behind beeScript is to have an automation language for the debugger like some modern debuggers have.</p>
+<div class="entry-content"><p>In one of my previous posts I wrote about beeScript.
+BeeScript is meant to be an automation language for diskotek.
+This post is a more detailed description.
+Right now it is in early development so this is the description of how it is developed and what state it is in.   <br/>
+This is a list of what is currently implemented regarding the communication with the backend:</p>
 
-<p>Currently it looks something like this(as development goes on it may change):</p>
+<ul>
+<li><p>reading memory  <br/>
+    place=0x80000000  <br/>
+    a = memory.place</p></li>
+<li><p>sending gdb commands  <br/>
+    s ni  <br/>
+    s disas /rm $eip-40, $eip+40</p></li>
+</ul>
 
-<pre><code>def doThat()
-  variable=5
 
-def doThis()
-  variable=3
+<p>One can use control flow structures, function definitions, variable definitions, expressions.
+Some might be developed further.</p>
 
-place = 0x80000000
-memory.place = 'nop'
-variable = memory.place
-if variable == 3
-  doThat()
-else
-  doThis()
+<p>now the look on the internals of how it all works</p>
 
-while variable
-  variable=variable-1
+<ul>
+<li>parser is jison generated and is located in beeScript.jison</li>
+<li>interface for code generator is located in compiler.coffee.
+it contains bunch of functions that are called when parsers productions are reduced. That class is meant to bee extended
+by any code/ast generator.</li>
+</ul>
+
+
+<h3>beeScriptRunner &amp; stack machine vm</h3>
+
+<p>example of one such generator is in beeScriptRunner.coffee. It is a generator for stack machine vm written in coffee script.
+The stack machine vm has two stacks.</p>
+
+<ul>
+<li>expression stack. Used to calculate and assign stuff  <br/>
+    @stack</li>
+<li>call stack. Used for method invocation  <br/>
+    @callStack</li>
+</ul>
+
+
+<p>variables are stored in</p>
+
+<pre><code>@variables    
 </code></pre>
 
-<p>I plan to add something like this:</p>
+<p>@variables is an object whose properties are variable names</p>
 
-<pre><code>memory.headers.elfHeader
-fImage.headers.elfHeader
-fImage.headers.relocations
+<pre><code>name:{
+  name:
+  value:
+}
 </code></pre>
 
-<p>Also plan to integrate Ace editor in main page.<br/>
-BeeScript implementation is in CoffeeScript it has compiler in CoffeeScript that produces something
-that might be called &ldquo;code&rdquo;, it&rsquo;s a stack of functions.
-That generated content is then turned over to simple stack machine runner that runs those functions one by one.</p>
+<p>functions are stored in</p>
 
-<p>Besides scripting togetherJS is half integrated on page it needs more work.<br/>
-x86 support is added.<br/>
-It has support for editing of raw bytes when user selects rows and then presses shift+enter. ctrl+enter will open instruction editing that does not work now.
-It opens up editbox where one can enter new bytes. If they do not fit it is error.<br/>
-That is all located in development branch.</p>
+<pre><code>@functions    
+</code></pre>
+
+<p>there is also diskotekLib that is an object containing functions that interface with the backend.
+It provides easy extensiblity for the script one can use functions from it by just calling them like functions defined in beeScript.
+There is only one argument passed that is ref to expression stack like so.</p>
+
+<pre><code>f(@stack)    
+</code></pre>
+
+<p>Parameters are on the stack so one just needs to pop them.  <br/>
+Care must be taken to leave the stack in state so that rest of the code works.  <br/>
+One would define a function with python like syntax without the : at the end like so</p>
+
+<pre><code>def func(param1, param2)
+  param1 = param2
+
+f=func()
+</code></pre>
+
+<p>It is important to put that newline at the end of the function. That newline means end of a function. That may be slightly modified.</p>
+
+<p>Arguments are searched first in function block and then global scope. That may change.   <br/>
+There are special variables:</p>
+
+<pre><code>memory
+eax,ecx,edx,ebx...
+</code></pre>
+
+<p>That list may change.   <br/>
+Memory special variable can be used for reading from and writing to memory.   <br/>
+This is an example of reading:</p>
+
+<pre><code>//create a variable that has an address from where to read memory from
+memoryLocation = 0x80000000
+//read from memory
+contentsOfMemLocation = memory.memoryLocation     
+</code></pre>
+
+<p>This is an example of writing:</p>
+
+<pre><code>//create a variable that has an address where we want to write to memory
+memoryLocation = 0x80000000
+//assemble and write to memory
+memory.memoryLocation = 'nop'
+</code></pre>
+
+<p>This post may be updated so that it can be used as a reference for the beeScript in the future.</p>
 </div>
 
 
@@ -168,7 +232,7 @@ That is all located in development branch.</p>
   
 
 
-<time datetime="2013-10-19T18:52:00+02:00" pubdate data-updated="true">Oct 19<span>th</span>, 2013</time>
+<time datetime="2013-10-25T15:26:00+02:00" pubdate data-updated="true">Oct 25<span>th</span>, 2013</time>
       
 
 
@@ -176,7 +240,7 @@ That is all located in development branch.</p>
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/" data-via="mn080202" data-counturl="http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://NikolaMandic.github.io/blog/2013/10/25/beescript/" data-via="mn080202" data-counturl="http://NikolaMandic.github.io/blog/2013/10/25/beescript/" >Tweet</a>
   
   
   
@@ -185,8 +249,8 @@ That is all located in development branch.</p>
     
     <p class="meta">
       
+        <a class="basic-alignment left" href="/blog/2013/10/22/requirejs-module-and-angularjs/" title="Previous Post: requirejs module and angularjs">&laquo; requirejs module and angularjs</a>
       
-        <a class="basic-alignment right" href="/blog/2013/10/22/requirejs-module-and-angularjs/" title="Next Post: requirejs module and angularjs">requirejs module and angularjs &raquo;</a>
       
     </p>
   </footer>
@@ -278,8 +342,8 @@ That is all located in development branch.</p>
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/';
-        var disqus_url = 'http://NikolaMandic.github.io/blog/2013/10/19/diskotek-second-iteration/';
+        var disqus_identifier = 'http://NikolaMandic.github.io/blog/2013/10/25/beescript/';
+        var disqus_url = 'http://NikolaMandic.github.io/blog/2013/10/25/beescript/';
         var disqus_script = 'embed.js';
       
     (function () {
