@@ -198,8 +198,12 @@ This is an example of reading:</p>
 <pre><code>//create a variable that has an address from where to read memory from
 memoryLocation = 0x80000000
 //read from memory
-contentsOfMemLocation = memory.memoryLocation     
+contentsOfMemLocation = memory.memoryLocation 
 </code></pre>
+
+<p>In the background reading works like cache memory with block access. First it tries to access location if it is not there it asks the backend.
+What is returned is a dictionary that looks like this
+Then calls access function one more time and gets it.</p>
 
 <p>This is an example of writing:</p>
 
@@ -252,6 +256,8 @@ memory.memoryLocation = 'nop'
         <a class="basic-alignment left" href="/blog/2013/10/22/requirejs-module-and-angularjs/" title="Previous Post: requirejs module and angularjs">&laquo; requirejs module and angularjs</a>
       
       
+        <a class="basic-alignment right" href="/blog/2013/10/29/coffeescript-function-invocation/" title="Next Post: CoffeeScript function invocation">CoffeeScript function invocation &raquo;</a>
+      
     </p>
   </footer>
 </article>
@@ -271,6 +277,10 @@ memory.memoryLocation = 'nop'
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/29/coffeescript-function-invocation/">CoffeeScript Function Invocation</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/25/beescript/">beeScript</a>

@@ -9,9 +9,7 @@
   <meta name="author" content="Nikola Mandic">
 
   
-  <meta name="description" content="In one of my previous posts I wrote about beeScript.
-BeeScript is meant to be an automation language for diskotek.
-This post is a more detailed &hellip;">
+  <meta name="description" content="I could not find this in documentation so here is a blog post. Lets say you want to pass an object to a function in CoffeeScript. Like so: options = &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +77,122 @@ This post is a more detailed &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/10/29/coffeescript-function-invocation/">CoffeeScript Function Invocation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-10-29T00:41:00+01:00" pubdate data-updated="true">Oct 29<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I could not find this in documentation so here is a blog post.   <br/>
+Lets say you want to pass an object to a function in CoffeeScript.  <br/>
+Like so:</p>
+
+<pre><code>options =
+  option1: true
+  option5: false
+
+methodCall(options)
+</code></pre>
+
+<p>You can also do it like this:</p>
+
+<pre><code>methodCall({option1:true,option5:false})
+</code></pre>
+
+<p>or you can do it with out the {}</p>
+
+<pre><code>methodCall(option1:true,option5:false)
+</code></pre>
+
+<p>or you can use multiple line</p>
+
+<pre><code>methodCall(
+  option1:true,
+  option5:false
+)
+</code></pre>
+
+<p>but what happens if you want to pass two seperate objects like this:</p>
+
+<pre><code>methodCall(object1,object2)    
+</code></pre>
+
+<p>you can write</p>
+
+<pre><code>methodCall({option1:true},{option5:false})    
+</code></pre>
+
+<p>but you can also use indenation for same effect</p>
+
+<pre><code>methodCall(
+  option1:true
+    option5:false
+)    
+</code></pre>
+
+<p>this is an error</p>
+
+<pre><code>methodCall(
+option1:true
+  option5:false
+)    
+</code></pre>
+
+<p>but this is not</p>
+
+<pre><code>methodCall(option1:true
+option5:false
+)    
+</code></pre>
+
+<p>the last example is the same as</p>
+
+<pre><code>methodCall({option1:true,option5:true})     
+</code></pre>
+
+<p>while</p>
+
+<pre><code>methodCall(option1:true
+  option5:false
+)
+</code></pre>
+
+<p>is equivalet of</p>
+
+<pre><code>methodCall({option1:true},{option5:false})
+</code></pre>
+
+<p>So to sum it up  <br/>
+indentation level can be used to separate object arguments in CoffeeScript.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -201,8 +315,12 @@ This is an example of reading:</p>
 <pre><code>//create a variable that has an address from where to read memory from
 memoryLocation = 0x80000000
 //read from memory
-contentsOfMemLocation = memory.memoryLocation     
+contentsOfMemLocation = memory.memoryLocation 
 </code></pre>
+
+<p>In the background reading works like cache memory with block access. First it tries to access location if it is not there it asks the backend.
+What is returned is a dictionary that looks like this
+Then calls access function one more time and gets it.</p>
 
 <p>This is an example of writing:</p>
 
@@ -381,6 +499,10 @@ That is all located in development branch.</p>
 <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2013/10/29/coffeescript-function-invocation/">CoffeeScript Function Invocation</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2013/10/25/beescript/">beeScript</a>

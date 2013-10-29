@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-10-28T06:02:32+01:00</updated>
+  <updated>2013-10-29T01:03:25+01:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -12,6 +12,95 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CoffeeScript function invocation]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/10/29/coffeescript-function-invocation/"/>
+    <updated>2013-10-29T00:41:00+01:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/10/29/coffeescript-function-invocation</id>
+    <content type="html"><![CDATA[<p>I could not find this in documentation so here is a blog post.   <br/>
+Lets say you want to pass an object to a function in CoffeeScript.  <br/>
+Like so:</p>
+
+<pre><code>options =
+  option1: true
+  option5: false
+
+methodCall(options)
+</code></pre>
+
+<p>You can also do it like this:</p>
+
+<pre><code>methodCall({option1:true,option5:false})
+</code></pre>
+
+<p>or you can do it with out the {}</p>
+
+<pre><code>methodCall(option1:true,option5:false)
+</code></pre>
+
+<p>or you can use multiple line</p>
+
+<pre><code>methodCall(
+  option1:true,
+  option5:false
+)
+</code></pre>
+
+<p>but what happens if you want to pass two seperate objects like this:</p>
+
+<pre><code>methodCall(object1,object2)    
+</code></pre>
+
+<p>you can write</p>
+
+<pre><code>methodCall({option1:true},{option5:false})    
+</code></pre>
+
+<p>but you can also use indenation for same effect</p>
+
+<pre><code>methodCall(
+  option1:true
+    option5:false
+)    
+</code></pre>
+
+<p>this is an error</p>
+
+<pre><code>methodCall(
+option1:true
+  option5:false
+)    
+</code></pre>
+
+<p>but this is not</p>
+
+<pre><code>methodCall(option1:true
+option5:false
+)    
+</code></pre>
+
+<p>the last example is the same as</p>
+
+<pre><code>methodCall({option1:true,option5:true})     
+</code></pre>
+
+<p>while</p>
+
+<pre><code>methodCall(option1:true
+  option5:false
+)
+</code></pre>
+
+<p>is equivalet of</p>
+
+<pre><code>methodCall({option1:true},{option5:false})
+</code></pre>
+
+<p>So to sum it up  <br/>
+indentation level can be used to separate object arguments in CoffeeScript.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[beeScript]]></title>
@@ -111,8 +200,12 @@ This is an example of reading:</p>
 <pre><code>//create a variable that has an address from where to read memory from
 memoryLocation = 0x80000000
 //read from memory
-contentsOfMemLocation = memory.memoryLocation     
+contentsOfMemLocation = memory.memoryLocation 
 </code></pre>
+
+<p>In the background reading works like cache memory with block access. First it tries to access location if it is not there it asks the backend.
+What is returned is a dictionary that looks like this
+Then calls access function one more time and gets it.</p>
 
 <p>This is an example of writing:</p>
 
