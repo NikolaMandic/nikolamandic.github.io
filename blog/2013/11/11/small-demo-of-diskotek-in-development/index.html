@@ -5,12 +5,12 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>requirejs module and angularjs - NikolaMandic.github.io</title>
+  <title>small demo of diskotek in development - NikolaMandic.github.io</title>
   <meta name="author" content="Nikola Mandic">
 
   
-  <meta name="description" content="here is a way of including requirejs package to be used as angular dependency. 'use strict'; //setup module loading
-require.config({ packages:[{ name &hellip;">
+  <meta name="description" content="The following video shows current capability of diskotek
+in driving the backend utilities and the gdb in browser. It shows: loading of file in gdb &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +19,7 @@ require.config({ packages:[{ name &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs">
+  <link rel="canonical" href="http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="NikolaMandic.github.io" type="application/atom+xml">
@@ -81,7 +81,7 @@ require.config({ packages:[{ name &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Requirejs Module and Angularjs</h1>
+      <h1 class="entry-title">Small Demo of Diskotek in Development</h1>
     
     
       <p class="meta">
@@ -97,49 +97,36 @@ require.config({ packages:[{ name &hellip;">
   
 
 
-<time datetime="2013-10-22T23:33:00+02:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2013</time>
+<time datetime="2013-11-11T17:16:00+01:00" pubdate data-updated="true">Nov 11<span>th</span>, 2013</time>
         
       </p>
     
   </header>
 
 
-<div class="entry-content"><p>here is a way of including requirejs package to be used as angular dependency.</p>
+<div class="entry-content"><p>The following video shows current capability of diskotek
+in driving the backend utilities and the gdb in browser.   <br/>
+It shows:</p>
 
-<div><script src='https://gist.github.com/7108545.js'></script>
-<noscript><pre><code>'use strict';
-
-//setup module loading
-require.config({
-    packages:[{
-      name:'ace',
-      location:'../bower_components/ace/lib/ace',
-      main:'ace'
-    }]
-});
-//create wraper service
-angular.module('myShinyNewApp').factory('ace', function() {
-  var ace={
-    ace:null
-  };
-
-  require(['ace'],function(_ace){
-      ace.ace=_ace;
-  });
-  return ace;
-});
-
-//and now use it for example in a directive
-
-angular.module('ldApp').directive('editor',['ace',function(aceS) {
-  var ace = aceS.ace;
-  //then it can be used like it would normaly
-  var editor = ace.edit(element);
-
-}]);
-</code></pre></noscript></div>
+<ul>
+<li>loading of file in gdb without running it.</li>
+<li>viewing information from disassembled file.</li>
+<li>recording, sending commands.</li>
+<li>stepping over, setting breakpoints and running.</li>
+<li>creating new script and running it step by step until it gets to</li>
+<li>where the user stopped when using gdb manually.</li>
+<li>it also shows new beeScript features like double dot field accessor</li>
+<li>and interpolation when sending commands to gdb.</li>
+<li>and at the end the &ldquo;render&rdquo; function witch triggers ui refresh with current data from the backend.</li>
+</ul>
 
 
+<p>It is not smooth as it could be right now but this is just a demo of functionality developed
+so far.    <br/>
+Some functionality will be changed like for example accessing entry point from beeScript.
+It does not show memory editing.</p>
+
+<iframe width="560" height="315" src="//www.youtube.com/embed/qUNKPgoQ8z8" frameborder="0" allowfullscreen></iframe>
 
 </div>
 
@@ -163,7 +150,7 @@ angular.module('ldApp').directive('editor',['ace',function(aceS) {
   
 
 
-<time datetime="2013-10-22T23:33:00+02:00" pubdate data-updated="true">Oct 22<span>nd</span>, 2013</time>
+<time datetime="2013-11-11T17:16:00+01:00" pubdate data-updated="true">Nov 11<span>th</span>, 2013</time>
       
 
 
@@ -171,7 +158,7 @@ angular.module('ldApp').directive('editor',['ace',function(aceS) {
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/" data-via="mn080202" data-counturl="http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development/" data-via="mn080202" data-counturl="http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development/" >Tweet</a>
   
   
   
@@ -180,10 +167,8 @@ angular.module('ldApp').directive('editor',['ace',function(aceS) {
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2013/10/19/diskotek-second-iteration/" title="Previous Post: diskotek: second iteration">&laquo; diskotek: second iteration</a>
+        <a class="basic-alignment left" href="/blog/2013/11/09/small-demo-of-diskotek-in-development/" title="Previous Post: small demo of diskotek in development">&laquo; small demo of diskotek in development</a>
       
-      
-        <a class="basic-alignment right" href="/blog/2013/10/25/beescript/" title="Next Post: beeScript">beeScript &raquo;</a>
       
     </p>
   </footer>
@@ -283,8 +268,8 @@ angular.module('ldApp').directive('editor',['ace',function(aceS) {
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/';
-        var disqus_url = 'http://NikolaMandic.github.io/blog/2013/10/22/requirejs-module-and-angularjs/';
+        var disqus_identifier = 'http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development/';
+        var disqus_url = 'http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development/';
         var disqus_script = 'embed.js';
       
     (function () {

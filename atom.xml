@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-11-08T16:44:29+01:00</updated>
+  <updated>2013-11-11T23:53:06+01:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -12,6 +12,70 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[small demo of diskotek in development]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development/"/>
+    <updated>2013-11-11T17:16:00+01:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/11/11/small-demo-of-diskotek-in-development</id>
+    <content type="html"><![CDATA[<p>The following video shows current capability of diskotek
+in driving the backend utilities and the gdb in browser.   <br/>
+It shows:</p>
+
+<ul>
+<li>loading of file in gdb without running it.</li>
+<li>viewing information from disassembled file.</li>
+<li>recording, sending commands.</li>
+<li>stepping over, setting breakpoints and running.</li>
+<li>creating new script and running it step by step until it gets to</li>
+<li>where the user stopped when using gdb manually.</li>
+<li>it also shows new beeScript features like double dot field accessor</li>
+<li>and interpolation when sending commands to gdb.</li>
+<li>and at the end the &ldquo;render&rdquo; function witch triggers ui refresh with current data from the backend.</li>
+</ul>
+
+
+<p>It is not smooth as it could be right now but this is just a demo of functionality developed
+so far.    <br/>
+Some functionality will be changed like for example accessing entry point from beeScript.
+It does not show memory editing.</p>
+
+<iframe width="560" height="315" src="http://NikolaMandic.github.io//www.youtube.com/embed/qUNKPgoQ8z8" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[small demo of diskotek in development]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/11/09/small-demo-of-diskotek-in-development/"/>
+    <updated>2013-11-09T17:16:00+01:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/11/09/small-demo-of-diskotek-in-development</id>
+    <content type="html"><![CDATA[<p>The following video shows current capability of diskotek
+in driving the backend utilities and the gdb in browser.   <br/>
+It shows:</p>
+
+<ul>
+<li>loading of file in gdb without running it.</li>
+<li>viewing information from disassembled file.</li>
+<li>recording, sending commands.</li>
+<li>stepping over, setting breakpoints and running.</li>
+<li>creating new script and running it step by step until it gets to</li>
+<li>where the user stopped when using gdb manually.</li>
+<li>it also shows new beeScript features like double dot field accessor</li>
+<li>and interpolation when sending commands to gdb.</li>
+<li>and at the end the &ldquo;render&rdquo; function witch triggers ui refresh with current data from the backend.</li>
+</ul>
+
+
+<p>It is not smooth as it could be right now but this is just a demo of functionality developed
+so far.    <br/>
+Some functionality will be changed like for example accessing entry point from beeScript.
+It does not show memory editing.</p>
+
+<iframe width="560" height="315" src="http://NikolaMandic.github.io//www.youtube.com/embed/qUNKPgoQ8z8" frameborder="0" allowfullscreen></iframe>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CoffeeScript function invocation]]></title>
