@@ -9,8 +9,9 @@
   <meta name="author" content="Nikola Mandic">
 
   
-  <meta name="description" content="The following video shows current capability of diskotek
-in driving the backend utilities and the gdb in browser. It shows: loading of file in gdb &hellip;">
+  <meta name="description" content="In various languages one can redirect standard output.
+In JavaScript console.log is often used as stdout analogue.
+It might be useful to redirect it &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +79,78 @@ in driving the backend utilities and the gdb in browser. It shows: loading of fi
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/13/redirecting-console-output/">Redirecting Console Output</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-13T23:09:00+01:00" pubdate data-updated="true">Nov 13<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In various languages one can redirect standard output.
+In JavaScript console.log is often used as stdout analogue.
+It might be useful to redirect it.
+One can just mock console object and provide custom log methods.
+But then it is hard to emulate the sprintf like functionality of console.log.
+There is library on the web called sprintf <a href="https://github.com/alexei/sprintf.js">https://github.com/alexei/sprintf.js</a>
+that can step in and provide something like console.log emulator.</p>
+
+<p>Here is one example in CoffeeScript  <br/>
+first install sprintf from github and require it like any other module</p>
+
+<pre><code>sprintf = require('../sprintf/src/sprintf').sprintf    
+</code></pre>
+
+<p>this line might be needed if engine optimzes variables so that it is not lost.  <br/>
+it outputs nothing</p>
+
+<pre><code>sprintf('a')
+</code></pre>
+
+<ol>
+<li>create IIFE and closure with console object.</li>
+<li>pass an object with mock log function   <br/>
+2.1 mocked function copies arguments   <br/>
+2.2 and calls sprintf with the arguments passed to mocked log functions</li>
+</ol>
+
+
+<p>so inside the closure console.log is redirected to sprintf</p>
+
+<pre><code>((console)-&gt;    
+  console.log "output: %s","a"    
+)( log:()-&gt;    
+  arg=Array.prototype.slice.apply(arguments)    
+  console.log (sprintf.apply(this,arg))    
+)       
+</code></pre>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -561,6 +634,10 @@ That is all located in development branch.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2013/11/13/redirecting-console-output/">Redirecting Console Output</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2013/11/11/small-demo-of-diskotek-in-development/">Small Demo of Diskotek in Development</a>
       </li>
     
@@ -574,10 +651,6 @@ That is all located in development branch.</p>
     
       <li class="post">
         <a href="/blog/2013/10/22/requirejs-module-and-angularjs/">Requirejs Module and Angularjs</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/10/19/diskotek-second-iteration/">Diskotek: Second Iteration</a>
       </li>
     
   </ul>

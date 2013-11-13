@@ -4,7 +4,7 @@
   <title><![CDATA[NikolaMandic.github.io]]></title>
   <link href="http://NikolaMandic.github.io/atom.xml" rel="self"/>
   <link href="http://NikolaMandic.github.io/"/>
-  <updated>2013-11-12T00:00:33+01:00</updated>
+  <updated>2013-11-13T23:35:16+01:00</updated>
   <id>http://NikolaMandic.github.io/</id>
   <author>
     <name><![CDATA[Nikola Mandic]]></name>
@@ -12,6 +12,51 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[redirecting console output]]></title>
+    <link href="http://NikolaMandic.github.io/blog/2013/11/13/redirecting-console-output/"/>
+    <updated>2013-11-13T23:09:00+01:00</updated>
+    <id>http://NikolaMandic.github.io/blog/2013/11/13/redirecting-console-output</id>
+    <content type="html"><![CDATA[<p>In various languages one can redirect standard output.
+In JavaScript console.log is often used as stdout analogue.
+It might be useful to redirect it.
+One can just mock console object and provide custom log methods.
+But then it is hard to emulate the sprintf like functionality of console.log.
+There is library on the web called sprintf <a href="https://github.com/alexei/sprintf.js">https://github.com/alexei/sprintf.js</a>
+that can step in and provide something like console.log emulator.</p>
+
+<p>Here is one example in CoffeeScript  <br/>
+first install sprintf from github and require it like any other module</p>
+
+<pre><code>sprintf = require('../sprintf/src/sprintf').sprintf    
+</code></pre>
+
+<p>this line might be needed if engine optimzes variables so that it is not lost.  <br/>
+it outputs nothing</p>
+
+<pre><code>sprintf('a')
+</code></pre>
+
+<ol>
+<li>create IIFE and closure with console object.</li>
+<li>pass an object with mock log function   <br/>
+2.1 mocked function copies arguments   <br/>
+2.2 and calls sprintf with the arguments passed to mocked log functions</li>
+</ol>
+
+
+<p>so inside the closure console.log is redirected to sprintf</p>
+
+<pre><code>((console)-&gt;    
+  console.log "output: %s","a"    
+)( log:()-&gt;    
+  arg=Array.prototype.slice.apply(arguments)    
+  console.log (sprintf.apply(this,arg))    
+)       
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[small demo of diskotek in development]]></title>
